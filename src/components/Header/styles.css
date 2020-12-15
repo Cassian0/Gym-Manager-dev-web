@@ -1,0 +1,42 @@
+header {
+    padding: 32px;
+    /* border-bottom: 1px solid #333; */
+    /* background: rgba(0, 0, 0, 0.1); */
+  }
+  
+  .container {
+    width: 1150px;
+    height: 92vh;
+    background: var(--color-greyback);
+    margin: 40px auto;
+    border-radius: 40px;
+  }
+  .links {
+    display: flex;
+  }
+  
+  .links h1 {
+    margin-left: 10px;
+  }
+  
+  .links a {
+    color: white;
+    font-size: 22px;
+    line-height: 28px;
+    margin: 0px 16px;
+    padding-top: 8px;
+    text-decoration: none;
+  }
+  .links a:hover {
+    color: var(--color-blue);
+    transition: color 300ms;
+  }
+  
+  .links a.active {
+    color: var(--color-blue);
+  }
+  
+  .links-page {
+    margin-left: 270px;
+    margin-top: 9px;
+  }
