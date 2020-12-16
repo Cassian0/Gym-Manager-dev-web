@@ -6,12 +6,12 @@ import api from '../../../src/services/api';
 
 import '../../../src/index.css';
 
-function Instructor() {
-    const [instructors, setInstructors] = useState([]);
+function Member() {
+    const [members, setMembers] = useState([]);
 
     useEffect(async () => {
-        const response = await api.get('/instructors/id');
-        setInstructors(response.data);
+        const response = await api.get('/members/1');
+        setMembers(response.data);
     }, [])
 
     return (
@@ -28,53 +28,64 @@ function Instructor() {
                 <h3>Detalhes</h3>
 
                 {
-                    instructors.map(instructor => (
+                    members.map(member => (
                         <div className="item">
-                            <div key={instructor.id}>Instrutor</div>
-                            <div>{instructor.name}</div>
+                            <div key={member.id}>Membro</div>
+                            <div>{member.name}</div>
                         </div>
                     ))}
 
                 {
-                    instructors.map(instructor => (
+                    members.map(member => (
                         <div className="item">
-                            <div key={instructor.id}>Email</div>
-                            <div>{instructor.email}</div>
+                            <div key={member.id}>Email</div>
+                            <div>{member.email}</div>
                         </div>
                     ))}
 
                 {
-                    instructors.map(instructor => (
+                    members.map(member => (
                         <div className="item">
-                            <div key={instructor.id}>Sexo</div>
-                            <div>{instructor.gender}</div>
+                            <div key={member.id}>Sexo</div>
+                            <div>{member.gender}</div>
                         </div>
                     ))}
 
                 {
-                    instructors.map(instructor => (
+                    members.map(member => (
                         <div className="item">
-                            <div key={instructor.id}>Acompanhamento</div>
+                            <div key={member.id}>Peso</div>
                             <div>
 
-                                <span>{instructor.services}</span>
+                                <span>{member.weight}</span>
+
+                            </div>
+                        </div>
+                    ))}
+                {
+                    members.map(member => (
+                        <div className="item">
+                            <div key={member.id}>Altura</div>
+                            <div>
+
+                                <span>{member.height}</span>
 
                             </div>
                         </div>
                     ))}
 
                 {
-                    instructors.map(instructor => (
+                    members.map(member => (
                         <div className="item">
                             <div>Desde</div>
-                            <div>{instructor.createdAt}</div>
+                            <div>{member.createdAt}</div>
                         </div>
 
                     ))}
 
                     {
-                    instructors.map(instructor => (
-                        <Link to={`/store-instructor/${instructor.id}`}
+                    members.map(member => (
+                        <Link to={`/store-member/${member.id}`}
                             className="button">Editar </Link>
                     ))
                 }
@@ -84,4 +95,4 @@ function Instructor() {
     )
 };
 
-export default Instructor;
+export default Member;

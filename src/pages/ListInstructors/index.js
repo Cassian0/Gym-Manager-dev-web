@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import api from '../../services/api';
+import api from '../../services/api.js';
 
 import '../../../src/index.css';
 
@@ -12,11 +12,12 @@ function ListInstructors() {
     useEffect(async () => {
         const response = await api.get('/instructors');
         setInstructors(response.data);
-    }, []);
+    }, 
+    []);
 
     return (
         
-        <div class="card table-container">
+        <div className="table-container">
             <Link to="/store-instructor">Novo</Link>
             <table width="100%">
                 <thead>
@@ -33,7 +34,7 @@ function ListInstructors() {
                             <tr key={instructor.id}>
 
                                 <td>
-                                    <img src="" alt="Foto do Instrutor" />
+                                    <img src="{{ intructor.avatar_url }}" alt="Foto do Instrutor" />
                                     {instructor.name}</td>
                                 <td>
                                     {instructor.services}
