@@ -1,53 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import api from '../../../src/services/api';
 
 import '../../../src/index.css';
+import Instructor from '../Instructor';
 
-function StoreMember() {
+
+function UpdateInstructor() {
     const [name, setName] = useState('');
     const [avatar_url, setAvatar_url] = useState('');
     const [email, setEmail] = useState('');
     const [gender, setGender] = useState('');
-    const [height, setHeight] = useState('');
-    const [weight, setWeight] = useState('');
+    const [services, setServices] = useState('');
+    const { params } = useRouteMatch();
+
+    useEffect(async() => {
+            if (params.id) {
+            const response = await api.get(`/instructors/${params.id}`) //recebemos o id
+            const { data } = response;// armazenamos no data 
+            setName(data.name);
+            setAvatar_url(data.avatar_url);
+            setEmail(data.email);
+            setGender(data.gender);
+            setServices(data.services);
+            }
+        
+    }, []);
 
     async function salvar() {
         try {
-            await api.post('/instructors/:instructor_id/members', {
+            await api.put(`/instructors/${params.id}`, {
                 avatar_url: avatar_url,
                 name: name,
                 email: email,
                 gender: gender,
-                height: height,
-                weight: weight
+                services: services
             });
 
         } catch (erro) {
-        console.log('Erro no cadastro de membro')
+        console.log('Erro na edição do instrutor')
         }
     }
 
+   
+    
+  
     return (
+
+
         <form className="details">
 
         <div className='item'>
-        <div>Avatar URL</div>
+        <label htmlFor='avatar_url'>Avatar URL</label>
             <div>
                 <input type='url'
                     id='avatar_url'
                     placeholder='http://'
                     value={avatar_url}
                     onChange={event => setAvatar_url(event.target.value)}
-                />
+                ></input>
             </div>
         </div>
 
 
         <div className="item">
-            <div>Membro</div>
+            <div>Instrutor</div>
             <div>
-                <input id="membro"
-                    placeholder="Nome do Membro"
+                <input id="instructor"
+                    placeholder="Nome do Instrutor"
                     value={name}
                     onChange={event => setName(event.target.value)}
                 />
@@ -74,23 +94,12 @@ function StoreMember() {
         </div>
 
         <div className="item">
-            <div>Altura (cm)</div>
+            <div>Área de atuação</div>
             <div>
                 <input
-                    id="height" placeholder=""
-                    value={height}
-                    onChange={event => setHeight(event.target.value)}
-                />
-            </div>
-        </div>
-
-        <div className="item">
-            <div>Peso (kg)</div>
-            <div>
-                <input
-                    id="weight" placeholder=""
-                    value={weight}
-                    onChange={event => setWeight(event.target.value)}
+                    id="services" placeholder="Separe os serviços prestados por vírgula"
+                    value={services}
+                    onChange={event => setServices(event.target.value)}
                 />
             </div>
         </div>
@@ -99,6 +108,7 @@ function StoreMember() {
 
     </form>
     )
-};
+    }
 
-export default StoreMember;
+
+export default UpdateInstructor;

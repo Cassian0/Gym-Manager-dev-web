@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
+import api from '../../../src/services/api';
 
 import '../../../src/index.css';
 
 function StoreInstructor() {
+
     const [name, setName] = useState('');
     const [avatar_url, setAvatar_url] = useState('');
     const [email, setEmail] = useState('');
     const [gender, setGender] = useState('');
     const [services, setServices] = useState('');
 
+    async function salvar() {
+        try {
+            await api.post('/instructors', {
+                avatar_url: avatar_url,
+                name: name,
+                email: email,
+                gender: gender,
+                services: services
+            });
+
+        } catch (erro) {
+        console.log('Erro no cadastro de instrutor')
+        }
+    }
+
     return (
-        <form>
+
+
+        <form className="details">
 
         <div className='item'>
+        <div>Avatar URL</div>
             <div>
                 <input type='url'
                     id='avatar_url'
@@ -36,10 +56,10 @@ function StoreInstructor() {
         </div>
 
         <div className="item">
-            <div>Data de Nascimento</div>
+            <div>Email</div>
             <div>
-                <input type="date"
-                    id="date-birth"
+                <input type="email"
+                    id="email"
                     value={email}
                     onChange={event => setEmail(event.target.value)}
                 />
@@ -49,8 +69,8 @@ function StoreInstructor() {
         <div className="item">
             <div>Sexo</div>
             <div>
-                <span><input type="radio" id="instructor-gender" value={gender} checked="checked" onChange={event => setGender(event.target.value)} />Masculino</span>
-                <span><input type="radio" id="instructor-gender" value={gender} checked="checked" onChange={event => setGender(event.target.value)} />Feminino</span>
+                <span><input type="radio" id="instructor-gender" value={gender} checked={this.state.gender==='Masculino'} onChange={event => setGender(event.target.value)} />Masculino</span>
+                <span><input type="radio" id="instructor-gender" value={gender} checked={this.state.gender==='Feminino'} onChange={event => setGender(event.target.value)} />Feminino</span>
             </div>
         </div>
 
@@ -65,7 +85,7 @@ function StoreInstructor() {
             </div>
         </div>
 
-        <button type="submit"> Salvar </button>
+        <button type="submit" onClick={salvar}>Salvar</button>
 
     </form>
     )

@@ -36,7 +36,7 @@ function ListMembers(){
                             <tr key={member.id}>
 
                                 <td>
-                                    <img src="{{ member.avatar_url }}" alt="Foto do Membro" />
+                                    <img src={ member.avatar_url } alt="Foto do Membro" />
                                     {member.name}</td>
                                 <td>
                                     {member.email}
@@ -49,7 +49,7 @@ function ListMembers(){
                                 </td>
 
                                 <td>
-                                    <Link to={`/member/${member.id}`}>ver</Link>
+                                    <Link to={`/members/${member.id}`}>ver</Link>
                                 </td>
                             </tr>
                         ))

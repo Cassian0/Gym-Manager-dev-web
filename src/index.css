@@ -28,7 +28,7 @@ header {
 .card {
   /* background-color: var(--color-grey); */
   width: 800px;
-  height: 550px;
+  height: 600px;
   margin: 10px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;

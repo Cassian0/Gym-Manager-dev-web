@@ -34,14 +34,14 @@ function ListInstructors() {
                             <tr key={instructor.id}>
 
                                 <td>
-                                    <img src="{{ intructor.avatar_url }}" alt="Foto do Instrutor" />
+                                    <img src={ instructor.avatar_url } alt="Foto do Instrutor" />
                                     {instructor.name}</td>
                                 <td>
                                     {instructor.services}
                                 </td>
 
                                 <td>
-                                    <Link to={`/instructor/${instructor.id}`}>ver</Link>
+                                    <Link to={`/instructors/${instructor.id}`}>ver</Link>
                                 </td>
                             </tr>
                         ))

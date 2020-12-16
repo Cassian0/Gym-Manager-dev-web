@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import api from '../../../src/services/api';
 
@@ -8,18 +8,38 @@ import '../../../src/index.css';
 
 function Instructor() {
     const [instructors, setInstructors] = useState([]);
+    const { params } = useRouteMatch();
+
+    
 
     useEffect(async () => {
-        const response = await api.get('/instructors/id');
+        const response = await api.get(`/instructors/${params.id}`);
         setInstructors(response.data);
     }, [])
+
+    async function excluir(id) {
+        try {
+            await api.delete(`/instructors/${id}`);
+        } catch (erro) {
+            console.log('Erro ao deletar instrutor')
+        }
+    }
 
     return (
         <div className="card">
             <section className="avatar">
-                <div className="img-centro">
-                    <img src="" />
-                </div>
+
+            {
+                    instructors.map(instructor => (
+                       
+                    <div className="img-centro">
+                       <img src={instructor.avatar_url} />
+                    </div>
+                        
+                    ))}
+                
+            
+
             </section>
 
 
@@ -74,10 +94,17 @@ function Instructor() {
 
                     {
                     instructors.map(instructor => (
-                        <Link to={`/store-instructor/${instructor.id}`}
+                        <Link to={`/update-instructors/${instructor.id}`}
                             className="button">Editar </Link>
                     ))
                 }
+                    {
+                    instructors.map(instructor => (
+                        <Link onClick={() => excluir(instructor.id)}
+                            className="button">Deletar</Link>
+                    ))
+}
+                
 
             </section>
         </div>

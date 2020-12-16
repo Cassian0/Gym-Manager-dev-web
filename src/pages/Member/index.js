@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch} from 'react-router-dom';
 
 import api from '../../../src/services/api';
 
@@ -8,18 +8,24 @@ import '../../../src/index.css';
 
 function Member() {
     const [members, setMembers] = useState([]);
+    const {params} = useRouteMatch();
 
     useEffect(async () => {
-        const response = await api.get('/members/1');
+        const response = await api.get(`/members/${params.id}`);
         setMembers(response.data);
     }, [])
 
     return (
         <div className="card">
             <section className="avatar">
-                <div className="img-centro">
-                    <img src="" />
-                </div>
+            {
+                    members.map(member => (
+                       
+                    <div className="img-centro">
+                       <img src={member.avatar_url} />
+                    </div>
+                        
+                    ))}
             </section>
 
 
@@ -86,7 +92,7 @@ function Member() {
                     {
                     members.map(member => (
                         <Link to={`/store-member/${member.id}`}
-                            className="button">Editar </Link>
+                            className="button">Editar</Link>
                     ))
                 }
 
