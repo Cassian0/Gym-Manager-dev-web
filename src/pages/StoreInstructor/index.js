@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../../src/services/api';
+import { Link} from 'react-router-dom';
 
 import '../../../src/index.css';
 
@@ -28,10 +29,19 @@ function StoreInstructor() {
 
     return (
 
+        <form className="card">
 
-        <form className="details">
-
+        <div className="avatar">
+        
+            <div className="img-centro">
+                <img src="https://source.unsplash.com/collection/3465564/300x300" alt="Foto do Instrutor"></img>
+         </div>
+        
+        </div>
+        <div className="details">
+        <h3>Novo Instrutor</h3>
         <div className='item'>
+
         <div>Avatar URL</div>
             <div>
                 <input type='url'
@@ -69,8 +79,11 @@ function StoreInstructor() {
         <div className="item">
             <div>Sexo</div>
             <div>
-                <span><input type="radio" id="instructor-gender" value={gender} checked={this.state.gender==='Masculino'} onChange={event => setGender(event.target.value)} />Masculino</span>
-                <span><input type="radio" id="instructor-gender" value={gender} checked={this.state.gender==='Feminino'} onChange={event => setGender(event.target.value)} />Feminino</span>
+            <input
+                    id="gender" 
+                    value={gender}
+                    onChange={event => setGender(event.target.value)}
+                />
             </div>
         </div>
 
@@ -85,8 +98,9 @@ function StoreInstructor() {
             </div>
         </div>
 
-        <button type="submit" onClick={salvar}>Salvar</button>
-
+        {/* <button type="submit" onClick={salvar}>Salvar</button> */}
+        <Link to={'/instructors'}  onClick={salvar} type="submit" className="btn">Salvar</ Link>
+        </div>
     </form>
     )
 };

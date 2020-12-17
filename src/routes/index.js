@@ -10,13 +10,15 @@ import ListInstructors from '../pages/ListInstructors';
 import StoreInstructor from '../pages/StoreInstructor';
 import Instructor from '../pages/Instructor';
 import UpdateInstructor from '../pages/UpdateInstructor';
+import UpdateMember from '../pages/UpdateMember';
 
 function Routes() {
     return (
         <Switch>
-            <Route path='/members/' component={ListMembers} />
-            <Route path='/members/:id' component={Member} />
+            <Route path='/members/' exact component={ListMembers} />
+            <Route path='/members/:id'  component={Member} />
             <Route path='/store-member/' component={StoreMember} />
+            <Route path='/update-member/:id' component={UpdateMember} />
 
 
             <Route path='/' exact component={ListInstructors} />

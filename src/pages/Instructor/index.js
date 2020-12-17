@@ -101,7 +101,7 @@ function Instructor() {
                     {
                     instructors.map(instructor => (
                         <Link onClick={() => excluir(instructor.id)}
-                            className="button">Deletar</Link>
+                            className="button delete" to="/instructors">Deletar</Link>
                     ))
 }
                 

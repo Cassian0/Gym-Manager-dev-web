@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../../src/services/api';
+import { Link} from 'react-router-dom';
 
 import '../../../src/index.css';
 
@@ -13,7 +14,7 @@ function StoreMember() {
 
     async function salvar() {
         try {
-            await api.post('/instructors/:instructor_id/members', {
+            await api.post('/members', {
                 avatar_url: avatar_url,
                 name: name,
                 email: email,
@@ -28,8 +29,17 @@ function StoreMember() {
     }
 
     return (
-        <form className="details">
+        <form className="card">
 
+        <div className="avatar">
+        
+            <div className="img-centro">
+                <img src="https://source.unsplash.com/collection/3465564/300x300" alt="Foto do Instrutor"></img>
+            </div>
+        
+        </div>
+        <div className="details">
+        <h3>Novo Membro</h3>
         <div className='item'>
         <div>Avatar URL</div>
             <div>
@@ -68,8 +78,11 @@ function StoreMember() {
         <div className="item">
             <div>Sexo</div>
             <div>
-                <span><input type="radio" id="instructor-gender" value={gender} checked="checked" onChange={event => setGender(event.target.value)} />Masculino</span>
-                <span><input type="radio" id="instructor-gender" value={gender} checked="checked" onChange={event => setGender(event.target.value)} />Feminino</span>
+            <input
+                    id="gender" 
+                    value={gender}
+                    onChange={event => setGender(event.target.value)}
+                />
             </div>
         </div>
 
@@ -95,8 +108,8 @@ function StoreMember() {
             </div>
         </div>
 
-        <button type="submit" onClick={salvar}>Salvar</button>
-
+        <Link to={'/members'}  onClick={salvar} type="submit" className="btn" >Salvar</ Link>
+</div>
     </form>
     )
 };

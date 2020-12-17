@@ -15,6 +15,14 @@ function Member() {
         setMembers(response.data);
     }, [])
 
+    async function excluir(id) {
+        try {
+            await api.delete(`/members/${id}`);
+        } catch (erro) {
+            console.log('Erro ao deletar Membro')
+        }
+    }
+
     return (
         <div className="card">
             <section className="avatar">
@@ -60,7 +68,7 @@ function Member() {
                 {
                     members.map(member => (
                         <div className="item">
-                            <div key={member.id}>Peso</div>
+                            <div key={member.id}>Peso (kg)</div>
                             <div>
 
                                 <span>{member.weight}</span>
@@ -71,7 +79,7 @@ function Member() {
                 {
                     members.map(member => (
                         <div className="item">
-                            <div key={member.id}>Altura</div>
+                            <div key={member.id}>Altura (cm)</div>
                             <div>
 
                                 <span>{member.height}</span>
@@ -91,10 +99,16 @@ function Member() {
 
                     {
                     members.map(member => (
-                        <Link to={`/store-member/${member.id}`}
+                        <Link to={`/update-member/${member.id}`}
                             className="button">Editar</Link>
                     ))
                 }
+                {
+                    members.map(member => (
+                        <Link onClick={() => excluir(member.id)}
+                            className="button delete" to="/members">Deletar</Link>
+                    ))
+}
 
             </section>
         </div>

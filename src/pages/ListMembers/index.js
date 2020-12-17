@@ -13,7 +13,7 @@ function ListMembers(){
         const response = await api.get('/members');
         setMembers(response.data);
     }, 
-    []);
+    [members]);
 
     return (
         

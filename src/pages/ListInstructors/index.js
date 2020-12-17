@@ -13,7 +13,7 @@ function ListInstructors() {
         const response = await api.get('/instructors');
         setInstructors(response.data);
     }, 
-    []);
+    [instructors]);
 
     return (
         
